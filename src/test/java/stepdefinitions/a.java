@@ -1,2 +1,4 @@
-package stepdefinitions;public class a {
+package stepdefinitions;
+
+public class a {
 }
