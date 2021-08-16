@@ -14,4 +14,20 @@ public class CreateOrEditACostumer {
 
     @FindBy(xpath = "//*[contains(text(),'Search')]")
     public WebElement searchbutton;
+
+    @FindBy(xpath = "//*[@class='Toastify__close-button Toastify__close-button--success']")
+    public WebElement successpopup;
+
+    @FindBy(xpath = "//*[@class='Toastify__close-button Toastify__close-button--error']")
+    public WebElement errorpopup;
+
+    @FindBy(xpath = "//*[@name='firstName']")
+    public WebElement firstname;
+
+    @FindBy(xpath = "(//div[@class='invalid-feedback'])[8]")
+    public WebElement verifyMessageAddress;
+
+    @FindBy(xpath = "(//div[@class='invalid-feedback'])[9]")
+    public WebElement verifyMessageCity;
+
 }
