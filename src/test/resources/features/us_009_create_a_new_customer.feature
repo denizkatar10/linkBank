@@ -11,4 +11,5 @@
       And click Create a new Customer
       And write a customer SSN
       And click Search button
+      Then check green success popup
 
