@@ -24,10 +24,25 @@ public class CreateOrEditACostumer {
     @FindBy(xpath = "//*[@name='firstName']")
     public WebElement firstname;
 
+    @FindBy(id = "save-entity")
+    public WebElement savebutton;
+
     @FindBy(xpath = "(//div[@class='invalid-feedback'])[8]")
     public WebElement verifyMessageAddress;
 
-    @FindBy(xpath = "(//div[@class='invalid-feedback'])[9]")
+    @FindBy(id = "tp-customer-address")
+    public WebElement addressbox;
+
+    @FindBy(xpath = "(//div[@class='invalid-feedback'])[8]")
     public WebElement verifyMessageCity;
+
+    @FindBy(id = "tp-customer-city")
+    public WebElement citybox;
+
+    @FindBy(id = "tp-customer-country")
+    public WebElement countydropbox;
+
+    @FindBy(id = "tp-customer-state")
+    public WebElement statebox;
 
 }

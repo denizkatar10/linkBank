@@ -10,7 +10,7 @@ import utilities.ConfigurationReader;
 import utilities.Driver;
 import utilities.ReusableMethods;
 
-public class NewApplicantSearchWithSSN {
+public class US_009_NewApplicantSearchWithSSN {
     HomePage homePage = new HomePage();
     SignInPage signInPage = new SignInPage();
     ControlPage controlPage = new ControlPage();
