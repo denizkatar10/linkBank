@@ -1,12 +1,16 @@
 package stepdefinitions;
 
 import io.cucumber.java.en.Given;
+
+import org.junit.Assert;
 import org.openqa.selenium.support.ui.Select;
+
 import pages.*;
 import utilities.ConfigurationReader;
 import utilities.Driver;
+import utilities.ReusableMethods;
 
-public class NewApplicantSearchWithSSN {
+public class US_009_NewApplicantSearchWithSSN {
     HomePage homePage = new HomePage();
     SignInPage signInPage = new SignInPage();
     ControlPage controlPage = new ControlPage();
@@ -54,6 +58,12 @@ public class NewApplicantSearchWithSSN {
     @Given("click Search button")
     public void click_search_button() {
         createOrEditACostumer.searchbutton.click();
+    }
+    @Given("check green success popup")
+    public void check_green_success_popup() {
+        createOrEditACostumer.successpopup.isDisplayed();
+        //Assert.assertEquals("Deniz",createOrEditACostumer.firstname.getAttribute("value"));
+
     }
 
 
