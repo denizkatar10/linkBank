@@ -19,4 +19,7 @@ public class HomePage {
     @FindBy(xpath="(//a[@class='dropdown-item'][2])")
     public WebElement register;
 
+    @FindBy(id="email")
+    public WebElement emailButton;
+
 }
