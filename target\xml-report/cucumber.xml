@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite errors="0" failures="1" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="3" time="9.424">
+    <testcase classname="System should not allow to make updates with invalid credentials" name="TC01_email_id_cannot_contain_just_digits_or_chars_without_&quot;@&quot;_sign_or_&quot;.&quot;_extension" time="8.194">
+        <system-out>
+            <![CDATA[Given user on the home page.................................................passed
+Then click account dropdown.................................................passed
+Given user on the signin  page..............................................passed
+Given customer enters username..............................................passed
+Given customer enters password..............................................passed
+Given click sign in.........................................................passed
+And click user dropdown.....................................................passed
+Then customer click user info...............................................passed
+And click email button......................................................passed
+And user enters email id "<email>"..........................................passed
+Then verify system does not accept invalid email address....................passed
+]]>
+        </system-out>
+    </testcase>
+    <testcase classname="System should not allow to make updates with invalid credentials" name="" time="0.003">
+        <failure message="The scenario has no steps" type="java.lang.Exception"/>
+    </testcase>
+    <testcase classname="System should not allow to make updates with invalid credentials" name="TC02 There should not be an option of any other language other than English or Turkish" time="0.807">
+        <system-out>
+            <![CDATA[Given customer clicks language textbox......................................passed
+Then customer sees English option...........................................passed
+Then customer sees Turkish options..........................................passed
+]]>
+        </system-out>
+    </testcase>
+</testsuite>
