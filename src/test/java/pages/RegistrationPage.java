@@ -7,7 +7,9 @@ import utilities.Driver;
 
 public class RegistrationPage {
 
-    public RegistrationPage(){PageFactory.initElements(Driver.getDriver(), this);}
+    public RegistrationPage(){
+        PageFactory.initElements(Driver.getDriver(), this);
+    }
 
     @FindBy(id="register-title")
     public WebElement registerTitle;
@@ -39,7 +41,7 @@ public class RegistrationPage {
     @FindBy(id = "secondPassword")
     public WebElement secondPasswordTextBox;
 
-    //////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////
 
     @FindBy(id = "register-submit")
     public WebElement registerButton;
@@ -52,12 +54,27 @@ public class RegistrationPage {
     @FindBy(xpath = "//*[text()='Your SSN is invalid']")
     public WebElement ssninvalid;
 
-    @FindBy()
-    public  WebElement FirstNameInvalid;
+    @FindBy(xpath = "//*[text()='first name is invalid']")
+    public  WebElement firstNameInvalid;
 
+    @FindBy(xpath = "//*[text()='Your last name is invalid']")
+    public  WebElement lastNameInvalid;
 
-    //is-touched is-dirty av-valid form-control
-    //is-touched is-pristine av-invalid is-invalid form-control
+//    @FindBy()
+//    public WebElement addressinvalid;
+
+    @FindBy(xpath = "//*[text()='Your mobile phone number is invalid']")
+    public WebElement mobilephoneInvalid;
+
+    @FindBy(xpath = "//*[text()='Your username is invalid']")
+    public WebElement usernameInvalid;
+
+    @FindBy(xpath = "//*[text()='This field is invalid']")
+    public WebElement emailInvalid;
+
+    @FindBy(xpath = "//*[text()='Your email is required to be at least 5 characters.']")
+    public WebElement emailAtLeastFiveChar;
+
     //////////////////////////////////////////////////////////////////
 
     @FindBy(xpath = "//*[text()='translation-not-found[error.ssnexists]']")
@@ -74,10 +91,13 @@ public class RegistrationPage {
     @FindBy(xpath = "//*[text()='Your Last Name is required']")
     public WebElement emptyLastname;
 
-    @FindBy(id = "lastname", className = "is-touched is-pristine av-invalid is-invalid form-control")
+    @FindBy(xpath = "//*[text()='Your Address is required']")
     public WebElement emptyAddress;
 
-    @FindBy()
+    @FindBy(xpath = "//*[text()='YourMobile Phone Number is required']")
+    public WebElement mobilephoneEmpty;
+
+    @FindBy(xpath = "//*[text()='Your username is required.']")
     public WebElement usernameEmpty;
 
     @FindBy(xpath = "//*[text()='Your email is required.']")
@@ -90,7 +110,3 @@ public class RegistrationPage {
     public WebElement secondPasswordEmpty;
 
 }
-
-
-
-//*[@id="register-form"]/div[1]/div

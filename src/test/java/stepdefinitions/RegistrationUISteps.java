@@ -4,12 +4,20 @@ import com.github.javafaker.Faker;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import org.junit.Assert;
+import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.FindBy;
 import pages.HomePage;
 import pages.RegistrationPage;
 import utilities.Driver;
 import utilities.ReusableMethods;
+
+import java.util.List;
 
 public class RegistrationUISteps {
 
@@ -63,7 +71,7 @@ public class RegistrationUISteps {
 
     @And("user provides mobilephone as {string}")
     public void userProvidesMobilephoneAs(String mobilephone) {
-        mobilephone = faker.phoneNumber().cellPhone();
+        mobilephone = faker.number().digits(3) + "-" + faker.number().digits(3) +"-" + faker.number().digits(4);
         this.mobilephone = mobilephone;
         Driver.waitAndSendText(registrationPage.mobilephoneTextBox, mobilephone, 5);
     }
@@ -110,17 +118,6 @@ public class RegistrationUISteps {
         registrationPage.ssnTextBox.click();
     }
 
-    @And("user clicks registerTitle")
-    public void userClicksRegisterTitle() {
-        registrationPage.registerTitle.click();
-    }
-
-    @Then("user sees the error message as {string} errorMessage_ssnExists")
-    public void userSeesTheErrorMessageAsErrorMessage_ssnExists(String expectedErrorMessage) {
-        ReusableMethods.waitForVisibility(registrationPage.errorSsnExists, 5);
-        Assert.assertTrue(registrationPage.errorSsnExists.isDisplayed());
-    }
-
     @Given("user clicks firstNameTextBox")
     public void userClicksFirstNameTextBox() {
         registrationPage.firstNameTextBox.click();
@@ -151,78 +148,166 @@ public class RegistrationUISteps {
         registrationPage.emailTextBox.click();
     }
 
-    @Then("user sees error message as {string} ssnInvalid")
-    public void userSeesErrorMessageAsSsnInvalid(String arg0) {
-    }
-
-    @Then("user sees error message as {string} FirstNameInvalid")
-    public void userSeesErrorMessageAsFirstNameInvalid(String arg0) {
-    }
-
-    @Then("user sees error message as {string} LastNameInvalid")
-    public void userSeesErrorMessageAsLastNameInvalid(String arg0) {
-    }
-
-    @Then("user sees error message as {string} addressInvalid")
-    public void userSeesErrorMessageAsAddressInvalid(String arg0) {
-    }
-
-    @Then("user sees error message as {string} mobilephoneInvalid")
-    public void userSeesErrorMessageAsMobilephoneInvalid(String arg0) {
-    }
-
-    @Then("user sees error message as {string} usernameInvalid")
-    public void userSeesErrorMessageAsUsernameInvalid(String arg0) {
-    }
-
-    @Then("user sees error message as {string} emailInvalid")
-    public void userSeesErrorMessageAsEmailInvalid(String arg0) {
-    }
-
-    @Then("user sees error message as {string} emailAtLeastFiveChar")
-    public void userSeesErrorMessageAsEmailAtLeastFiveChar(String arg0) {
-    }
-
     @Given("user clicks ssnTextBox and press enter")
     public void userClicksSsnTextBoxAndPressEnter() {
         registrationPage.ssnTextBox.sendKeys(""+ Keys.ENTER);
     }
 
-    @Then("user sees error message as ssnEmpty")
-    public void userSeesErrorMessageAsSsnEmpty() {
 
+    @Then("user sees error message as {string}")
+    public void userSeesErrorMessageAs(String string) {
+//        String errorEmptySSN = "Your SSN is required";
+//        String errorEmptyFirstName = "Your First Name is required";
+//        String errorEmptyLastName = "Your Last Name is required";
+//        String errorEmptyAddress = "Your Address is required";
+//        String errorEmptyMobilePhone = "Your Mobile Phone Number is required";
+//        String errorEmptyEmail = "Your email is required";
+//        String errorEmptyFirstPassword = "Your password is required";
+//        String errorEmptySecondPassword = "Your confirmation password is required";
+
+        WebDriver driver = new ChromeDriver();
+        Driver.wait(10);
+        List<WebElement> elements = driver.findElements(By.className("invalid-feedback"));
+        System.out.println("Number of elements:" +elements.size());
+
+        for (int i=0; i<elements.size();i++){
+            System.out.println("Error empty field message:" + elements.get(i).getAttribute("value"));
+        }
     }
 
-    @Then("user sees error message as firstNameEmpty")
-    public void userSeesErrorMessageAsFirstNameEmpty() {
+//    @Then("user sees error message as ssnEmpty")
+//    public void userSeesErrorMessageAsSsnEmpty() {
+//        Assert.assertTrue(registrationPage.emptySSN.isDisplayed());
+//    }
+//
+//    @Then("user sees error message as firstNameEmpty")
+//    public void userSeesErrorMessageAsFirstNameEmpty() {
+//        Assert.assertTrue(registrationPage.emptyFirstname.isDisplayed());
+//    }
+//
+//    @Then("user sees error message as lastNameEmpty")
+//    public void userSeesErrorMessageAsLastNameEmpty() {
+//        Assert.assertTrue(registrationPage.emptyLastname.isDisplayed());
+//    }
+//
+//    @Then("user sees error message as addressEmpty")
+//    public void userSeesErrorMessageAsAddressEmpty() {
+//        //Driver.waitForVisibility(registrationPage.emptyAddress, 5);
+//        //Driver.verifyElementNotDisplayed(By.xpath("//*[text()='Your Address is required']"));
+//        Driver.verifyElementDisplayed(registrationPage.emptyAddress);
+//    }
+//
+//    @Then("user sees error message as mobilephoneEmpty")
+//    public void userSeesErrorMessageAsMobilephoneEmpty() {
+//        //Driver.waitForVisibility(registrationPage.mobilephoneEmpty, 5);
+//        //Driver.verifyElementNotDisplayed(By.xpath("//*[text()='YourMobile Phone Number is required']"));
+//        //Assert.assertTrue(registrationPage.mobilephoneEmpty.isDisplayed());
+//    }
+//
+//    @Then("user sees error message as usernameEmpty")
+//    public void userSeesErrorMessageAsUsernameEmpty() {
+//        Assert.assertTrue(registrationPage.usernameEmpty.isDisplayed());
+//    }
+//
+//    @Then("user sees error message as emailEmpty")
+//    public void userSeesErrorMessageAsEmailEmpty() {
+//        Assert.assertTrue(registrationPage.emailEmpty.isDisplayed());
+//    }
+//
+//    @Then("user sees error message as firstPassword")
+//    public void userSeesErrorMessageAsFirstPassword() {
+//        Assert.assertTrue(registrationPage.firstPasswordEmpty.isDisplayed());
+//    }
+//
+//    @Then("user sees error message as secondPassword")
+//    public void userSeesErrorMessageAsSecondPassword() {
+//        Assert.assertTrue(registrationPage.secondPasswordEmpty.isDisplayed());
+//
+//    }
+
+
+    @When("user enters ssn number as  {string} and presses enter")
+    public void userEntersSsnNumberAsAndPressesEnter(String string) {
+        registrationPage.ssnTextBox.sendKeys(string);
+        registrationPage.ssnTextBox.sendKeys(Keys.ENTER);
     }
 
-    @Then("user sees error message as lastNameEmpty")
-    public void userSeesErrorMessageAsLastNameEmpty() {
+    @Then("user sees error message as ssnInvalid")
+    public void userSeesErrorMessageAsSsnInvalid() {
+        Assert.assertTrue(registrationPage.ssninvalid.isDisplayed());
     }
 
-    @Then("user sees error message as addressEmpty")
-    public void userSeesErrorMessageAsAddressEmpty() {
+    @When("user enters firstname as {string} and presses enter")
+    public void userEntersFirstnameAsAndPressesEnter(String string) {
+        registrationPage.firstNameTextBox.sendKeys(string);
+        registrationPage.firstNameTextBox.sendKeys(Keys.ENTER);
     }
 
-    @Then("user sees error message as mobilephoneEmpty")
-    public void userSeesErrorMessageAsMobilephoneEmpty() {
+    @Then("user sees error message as FirstNameInvalid")
+    public void userSeesErrorMessageAsFirstNameInvalid() {
+        Driver.verifyElementDisplayed(registrationPage.firstNameInvalid);
+        Assert.assertTrue(registrationPage.firstNameInvalid.isDisplayed());
     }
 
-    @Then("user sees error message as usernameEmpty")
-    public void userSeesErrorMessageAsUsernameEmpty() {
+    @When("user enters lastname as {string} and presses enter")
+    public void userEntersLastnameAsAndPressesEnter(String string) {
+        registrationPage.lastNameTextBox.sendKeys(string);
+        registrationPage.lastNameTextBox.sendKeys(Keys.ENTER);
     }
 
-    @Then("user sees error message as emailEmpty")
-    public void userSeesErrorMessageAsEmailEmpty() {
+    @Then("user sees error message as LastNameInvalid")
+    public void userSeesErrorMessageAsLastNameInvalid() {
+        Assert.assertTrue(registrationPage.lastNameInvalid.isDisplayed());
     }
 
-    @Then("user sees error message as firstPassword")
-    public void userSeesErrorMessageAsFirstPassword() {
+//    @When("user provides address as {string} and presses enter")
+//    public void userProvidesAddressAsAndPressesEnter(String string) {
+//        registrationPage.addressTextBox.sendKeys(string);
+//        registrationPage.addressTextBox.sendKeys(Keys.ENTER);
+//    }
+//
+//    @Then("user sees error message as addressInvalid")
+//    public void userSeesErrorMessageAsAddressInvalid() {
+//        Assert.assertTrue(registrationPage.addressinvalid.isDisplayed());
+//    }
+
+    @When("user provides mobilephone as {string} and presses enter")
+    public void userProvidesMobilephoneAsAndPressesEnter(String string) {
+        registrationPage.mobilephoneTextBox.sendKeys(string);
+        registrationPage.mobilephoneTextBox.sendKeys(Keys.ENTER);
     }
 
-    @Then("user sees error message as secondPassword")
-    public void userSeesErrorMessageAsSecondPassword() {
-
+    @Then("user sees error message as  mobilephoneInvalid")
+    public void userSeesErrorMessageAsMobilephoneInvalid() {
+        Assert.assertTrue(registrationPage.mobilephoneInvalid.isDisplayed());
     }
+
+    @When("user provides a username as {string} and presses enter")
+    public void userProvidesAUsernameAsAndPressesEnter(String string) {
+        registrationPage.usernameTextBox.sendKeys(string);
+        registrationPage.usernameTextBox.sendKeys(Keys.ENTER);
+    }
+
+    @Then("user sees error message as usernameInvalid")
+    public void userSeesErrorMessageAsUsernameInvalid() {
+        Assert.assertTrue(registrationPage.usernameInvalid.isDisplayed());
+    }
+
+    @When("user provides email id as {string} and presses enter")
+    public void userProvidesEmailIdAsAndPressesEnter(String string) {
+        registrationPage.emailTextBox.sendKeys(string);
+        registrationPage.emailTextBox.sendKeys(Keys.ENTER);
+    }
+
+    @Then("user sees error message as emailInvalid")
+    public void userSeesErrorMessageAsEmailInvalid() {
+        Assert.assertTrue(registrationPage.emailInvalid.isDisplayed());
+    }
+
+    @Then("user sees error message as emailAtLeastFiveChar")
+    public void userSeesErrorMessageAsEmailAtLeastFiveChar() {
+        Assert.assertTrue(registrationPage.emailAtLeastFiveChar.isDisplayed());
+    }
+
+
 }
