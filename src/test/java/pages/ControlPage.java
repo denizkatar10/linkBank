@@ -19,4 +19,10 @@ public class ControlPage {
 
     @FindBy(xpath = "//*[contains(text(),'Manage Accounts')]")
     public WebElement manageaccounts;
+
+    @FindBy(xpath = "//*[@id='account-menu']")
+    public WebElement useriddrop;
+
+    @FindBy(xpath = "(//*[@class='dropdown-item'])[3]")
+    public WebElement userinfo;
 }

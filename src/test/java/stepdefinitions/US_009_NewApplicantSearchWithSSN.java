@@ -1,5 +1,6 @@
 package stepdefinitions;
 
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 
 import org.junit.Assert;
@@ -65,8 +66,4 @@ public class US_009_NewApplicantSearchWithSSN {
         //Assert.assertEquals("Deniz",createOrEditACostumer.firstname.getAttribute("value"));
 
     }
-
-
-
-
 }
