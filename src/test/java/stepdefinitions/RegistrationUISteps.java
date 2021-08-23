@@ -14,6 +14,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import pages.HomePage;
 import pages.RegistrationPage;
+import pages.SignInPage;
+import pages.UserInfoPage;
 import utilities.Driver;
 import utilities.ReusableMethods;
 
@@ -24,6 +26,8 @@ public class RegistrationUISteps {
     HomePage homePage = new HomePage();
     RegistrationPage registrationPage = new RegistrationPage();
     Faker faker = new Faker();
+    UserInfoPage userInfoPage = new UserInfoPage();
+    SignInPage signInPage = new SignInPage();
 
     String ssn;
     String firstName;
@@ -310,4 +314,41 @@ public class RegistrationUISteps {
     }
 
 
+    @And("check customer name is showing on the top corner")
+    public void checkCustomerNameIsShowingOnTheTopCorner() {
+        ReusableMethods.waitForVisibility(userInfoPage.accountNameDropDown,2);
+        Assert.assertEquals("Deniz Csutomer", userInfoPage.accountNameDropDown.getText());
+    }
+
+    @Given("cancel button is there")
+    public void cancelButtonIsThere() {
+
+      Assert.assertTrue(signInPage.cancelbutton.isEnabled());
+    }
+
+    @Given("customer enters random user name")
+    public void customerEntersRandomUserName() {
+        signInPage.usernametext.sendKeys(faker.name().username());
+    }
+
+    @And("error message as Failed to sign in")
+    public void errorMessageAsFailedToSignIn(){
+        ReusableMethods.waitForVisibility(signInPage.failedToSignIn,2);
+        Assert.assertTrue(signInPage.failedToSignIn.isDisplayed());
+    }
+
+    @And("customer enters random password")
+    public void customerEntersRandomPassword() {
+        signInPage.passwordtext.sendKeys(faker.artist().name());
+    }
+
+    @Given("did you for get your password is a option")
+    public void didYouForGetYourPasswordIsAOption() {
+        Assert.assertTrue(signInPage.forgetPasswordLink.isEnabled());
+    }
+
+    @Given("register a new account link is a option")
+    public void registerANewAccountLinkIsAOption() {
+        Assert.assertTrue(signInPage.registerNewAccount.isEnabled());
+    }
 }

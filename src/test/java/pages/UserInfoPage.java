@@ -16,6 +16,9 @@ public class UserInfoPage {
     @FindBy(xpath = "//*[@class='dropdown show nav-item']")
     public WebElement userDropDown;
 
+    @FindBy(xpath = "//*[text()='Deniz Csutomer']")
+    public WebElement accountNameDropDown;
+
 //    @FindBy(xpath = "//*[text()='Email']")
 //    public WebElement emailButton;
 

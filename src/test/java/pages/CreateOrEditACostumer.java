@@ -13,7 +13,7 @@ public class CreateOrEditACostumer {
     public WebElement ssntextbox;
 
     @FindBy(xpath = "//*[contains(text(),'Search')]")
-    public WebElement searchbgitutton;
+    public WebElement searchbutton;
 
     @FindBy(xpath = "//*[@class='Toastify__close-button Toastify__close-button--success']")
     public WebElement successpopup;

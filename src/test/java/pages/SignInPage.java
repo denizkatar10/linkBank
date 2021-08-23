@@ -20,5 +20,17 @@ public class SignInPage {
     @FindBy(xpath = "(//button[@type='submit'])")
     public WebElement signinbutton;
 
+    @FindBy(xpath = "(//*[@class='btn btn-secondary'])")
+    public WebElement cancelbutton;
+
+    @FindBy(xpath = "//*[text()='Failed to sign in!']")
+    public WebElement failedToSignIn;
+
+    @FindBy(xpath = "//a[@href='/account/reset/request']")
+    public WebElement forgetPasswordLink;
+
+    @FindBy(xpath = "(//a[@href='/account/register'])[2]")
+    public WebElement registerNewAccount;
+
 
 }
