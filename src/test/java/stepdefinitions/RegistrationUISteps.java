@@ -11,13 +11,20 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import pages.HomePage;
 import pages.RegistrationPage;
+
 import pages.SignInPage;
 import pages.UserInfoPage;
 import utilities.Driver;
 import utilities.ReusableMethods;
+
+import pojos.Customer;
+import pojos.User;
+import utilities.*;
+
 
 import java.util.List;
 
@@ -25,10 +32,15 @@ public class RegistrationUISteps {
 
     HomePage homePage = new HomePage();
     RegistrationPage registrationPage = new RegistrationPage();
+
     Faker faker = new Faker();
     UserInfoPage userInfoPage = new UserInfoPage();
     SignInPage signInPage = new SignInPage();
+    Customer customer = new Customer();
+    User user = new User();
 
+
+    String filename = ConfigurationReader.getProperty("CustomerInformation.txt");
     String ssn;
     String firstName;
     String lastName;
@@ -50,6 +62,7 @@ public class RegistrationUISteps {
         ssn = faker.idNumber().ssnValid();
         this.ssn = ssn;
         Driver.waitAndSendText(registrationPage.ssnTextBox, ssn, 5);
+        customer.setSsn(ssn);
     }
 
     @And("user enters firstname as {string}")
@@ -57,6 +70,7 @@ public class RegistrationUISteps {
         firstName = faker.name().firstName();
         this.firstName = firstName;
         Driver.waitAndSendText(registrationPage.firstNameTextBox, firstName, 5);
+        customer.setFirstName(firstName);
     }
 
     @And("user enters lastname as {string}")
@@ -64,6 +78,7 @@ public class RegistrationUISteps {
         lastName = faker.name().lastName();
         this.lastName = lastName;
         Driver.waitAndSendText(registrationPage.lastNameTextBox, lastName, 5);
+        customer.setLastName(lastName);
     }
 
     @And("user provides address as {string}")
@@ -71,6 +86,7 @@ public class RegistrationUISteps {
         userAddress = faker.address().fullAddress();
         this.userAddress = userAddress;
         Driver.waitAndSendText(registrationPage.addressTextBox, userAddress, 5);
+        customer.setAddress(userAddress);
     }
 
     @And("user provides mobilephone as {string}")
@@ -78,6 +94,7 @@ public class RegistrationUISteps {
         mobilephone = faker.number().digits(3) + "-" + faker.number().digits(3) +"-" + faker.number().digits(4);
         this.mobilephone = mobilephone;
         Driver.waitAndSendText(registrationPage.mobilephoneTextBox, mobilephone, 5);
+        customer.setMobilePhoneNumber(mobilephone);
     }
 
     @And("user provides a username as {string}")
@@ -91,6 +108,7 @@ public class RegistrationUISteps {
     public void userProvidesEmailIdAs(String userEmail) {
         userEmail = firstName + lastName + "@gmail.com";
         Driver.waitAndSendText(registrationPage.emailTextBox, userEmail, 5);
+        customer.setEmail(userEmail);
     }
 
     @And("user enter the password as {string}")
@@ -115,6 +133,9 @@ public class RegistrationUISteps {
     public void userSeesTheSuccessMessageAs(String expectedMessage) {
         ReusableMethods.waitForVisibility(registrationPage.succesfulRegisterMessage, 5);
         Assert.assertTrue(registrationPage.succesfulRegisterMessage.isDisplayed());
+        System.out.println(filename + " Hi " + customer + ' ' + firstPassword + ' ' + username);
+        WriteToTxt.saveAllCustomer(filename, customer, firstPassword, username);
+        ReadTxt.returnAWholeUser(filename);
     }
 
     @Given("user clicks ssnTextBox")
@@ -169,65 +190,75 @@ public class RegistrationUISteps {
 //        String errorEmptyFirstPassword = "Your password is required";
 //        String errorEmptySecondPassword = "Your confirmation password is required";
 
-        WebDriver driver = new ChromeDriver();
-        Driver.wait(10);
-        List<WebElement> elements = driver.findElements(By.className("invalid-feedback"));
-        System.out.println("Number of elements:" +elements.size());
+//        Driver.wait(10);
+//        WebElement element = driver.findElement(By.className("invalid-feedback"));
+//        System.out.println(element);
+//        List<WebElement> elements = driver.findElements(By.xpath("//form[@id='register-form']//div[@class='text-danger form-group']"));
+        //By.xpath("//*[@class=\"invalid-feedback\"]")
 
+
+        List<WebElement> elements = Driver.getDriver().findElements(By.xpath("//*[@class=\"invalid-feedback\"]"));
+        System.out.println(elements);
+        System.out.println("Number of elements:" +elements.size());
         for (int i=0; i<elements.size();i++){
-            System.out.println("Error empty field message:" + elements.get(i).getAttribute("value"));
+            System.out.println("Error empty field message:" + elements.get(i).getText());
         }
+        Assert.assertTrue("All fields are not required ", elements.size() == 9);
+//        for (int i=0; i<registrationPage.elements.size();i++){
+//            System.out.println("Error empty field message:" + registrationPage.elements.get(i).getText());
+//        }
+//        Assert.assertTrue(registrationPage.errorMessage_invalid.isDisplayed());
     }
 
-//    @Then("user sees error message as ssnEmpty")
-//    public void userSeesErrorMessageAsSsnEmpty() {
-//        Assert.assertTrue(registrationPage.emptySSN.isDisplayed());
-//    }
-//
-//    @Then("user sees error message as firstNameEmpty")
-//    public void userSeesErrorMessageAsFirstNameEmpty() {
-//        Assert.assertTrue(registrationPage.emptyFirstname.isDisplayed());
-//    }
-//
-//    @Then("user sees error message as lastNameEmpty")
-//    public void userSeesErrorMessageAsLastNameEmpty() {
-//        Assert.assertTrue(registrationPage.emptyLastname.isDisplayed());
-//    }
-//
-//    @Then("user sees error message as addressEmpty")
-//    public void userSeesErrorMessageAsAddressEmpty() {
-//        //Driver.waitForVisibility(registrationPage.emptyAddress, 5);
-//        //Driver.verifyElementNotDisplayed(By.xpath("//*[text()='Your Address is required']"));
-//        Driver.verifyElementDisplayed(registrationPage.emptyAddress);
-//    }
-//
-//    @Then("user sees error message as mobilephoneEmpty")
-//    public void userSeesErrorMessageAsMobilephoneEmpty() {
-//        //Driver.waitForVisibility(registrationPage.mobilephoneEmpty, 5);
-//        //Driver.verifyElementNotDisplayed(By.xpath("//*[text()='YourMobile Phone Number is required']"));
-//        //Assert.assertTrue(registrationPage.mobilephoneEmpty.isDisplayed());
-//    }
-//
-//    @Then("user sees error message as usernameEmpty")
-//    public void userSeesErrorMessageAsUsernameEmpty() {
-//        Assert.assertTrue(registrationPage.usernameEmpty.isDisplayed());
-//    }
-//
-//    @Then("user sees error message as emailEmpty")
-//    public void userSeesErrorMessageAsEmailEmpty() {
-//        Assert.assertTrue(registrationPage.emailEmpty.isDisplayed());
-//    }
-//
-//    @Then("user sees error message as firstPassword")
-//    public void userSeesErrorMessageAsFirstPassword() {
-//        Assert.assertTrue(registrationPage.firstPasswordEmpty.isDisplayed());
-//    }
-//
-//    @Then("user sees error message as secondPassword")
-//    public void userSeesErrorMessageAsSecondPassword() {
-//        Assert.assertTrue(registrationPage.secondPasswordEmpty.isDisplayed());
-//
-//    }
+    @Then("user sees error message as ssnEmpty")
+    public void userSeesErrorMessageAsSsnEmpty() {
+        Assert.assertTrue(registrationPage.emptySSN.isDisplayed());
+    }
+
+    @Then("user sees error message as firstNameEmpty")
+    public void userSeesErrorMessageAsFirstNameEmpty() {
+        Assert.assertTrue(registrationPage.emptyFirstname.isDisplayed());
+    }
+
+    @Then("user sees error message as lastNameEmpty")
+    public void userSeesErrorMessageAsLastNameEmpty() {
+        Assert.assertTrue(registrationPage.emptyLastname.isDisplayed());
+    }
+
+    @Then("user sees error message as addressEmpty")
+    public void userSeesErrorMessageAsAddressEmpty() {
+        //Driver.waitForVisibility(registrationPage.emptyAddress, 5);
+        //Driver.verifyElementNotDisplayed(By.xpath("//*[text()='Your Address is required']"));
+        Driver.verifyElementDisplayed(registrationPage.emptyAddress);
+    }
+
+    @Then("user sees error message as mobilephoneEmpty")
+    public void userSeesErrorMessageAsMobilephoneEmpty() {
+        //Driver.waitForVisibility(registrationPage.mobilephoneEmpty, 5);
+        //Driver.verifyElementNotDisplayed(By.xpath("//*[text()='YourMobile Phone Number is required']"));
+        //Assert.assertTrue(registrationPage.mobilephoneEmpty.isDisplayed());
+    }
+
+    @Then("user sees error message as usernameEmpty")
+    public void userSeesErrorMessageAsUsernameEmpty() {
+        Assert.assertTrue(registrationPage.usernameEmpty.isDisplayed());
+    }
+
+    @Then("user sees error message as emailEmpty")
+    public void userSeesErrorMessageAsEmailEmpty() {
+        Assert.assertTrue(registrationPage.emailEmpty.isDisplayed());
+    }
+
+    @Then("user sees error message as firstPasswordEmpty")
+    public void userSeesErrorMessageAsFirstPasswordEmpty() {
+        Assert.assertTrue(registrationPage.firstPasswordEmpty.isDisplayed());
+    }
+
+    @Then("user sees error message as secondPasswordEmpty")
+    public void userSeesErrorMessageAsSecondPasswordEmpty() {
+        Assert.assertTrue(registrationPage.secondPasswordEmpty.isDisplayed());
+
+    }
 
 
     @When("user enters ssn number as  {string} and presses enter")
@@ -264,12 +295,12 @@ public class RegistrationUISteps {
         Assert.assertTrue(registrationPage.lastNameInvalid.isDisplayed());
     }
 
-//    @When("user provides address as {string} and presses enter")
-//    public void userProvidesAddressAsAndPressesEnter(String string) {
-//        registrationPage.addressTextBox.sendKeys(string);
-//        registrationPage.addressTextBox.sendKeys(Keys.ENTER);
-//    }
-//
+    @When("user provides address as {string} and presses enter")
+    public void userProvidesAddressAsAndPressesEnter(String string) {
+        registrationPage.addressTextBox.sendKeys(string);
+        registrationPage.addressTextBox.sendKeys(Keys.ENTER);
+    }
+
 //    @Then("user sees error message as addressInvalid")
 //    public void userSeesErrorMessageAsAddressInvalid() {
 //        Assert.assertTrue(registrationPage.addressinvalid.isDisplayed());
@@ -305,6 +336,7 @@ public class RegistrationUISteps {
 
     @Then("user sees error message as emailInvalid")
     public void userSeesErrorMessageAsEmailInvalid() {
+
         Assert.assertTrue(registrationPage.emailInvalid.isDisplayed());
     }
 

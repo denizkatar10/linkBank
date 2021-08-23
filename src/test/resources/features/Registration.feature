@@ -2,6 +2,7 @@
   Feature: Register new user
     Background:
       Given user on the application page
+      And click account dropdown
       And user click the register
 #      And user on the application page
 #      And user click the register
@@ -108,7 +109,53 @@
       |email|
       |yfj|
 
-    @TC0201_all_fields_are_required
+    @TC0201_ssn_required
+    Scenario: user leaves ssn field empty
+      Given user enters ssn number as  "<SSN>" and presses enter
+      Then user sees error message as ssnEmpty
+
+    @TC0202_firstName_required
+    Scenario: user leaves firstName field empty
+      Given user enters firstname as "<firstname>" and presses enter
+      Then user sees error message as firstNameEmpty
+
+    @TC0203_lastName_required
+    Scenario: user leaves lastName field empty
+      Given user enters lastname as "<lastname>" and presses enter
+      Then user sees error message as lastNameEmpty
+
+    @TC0204_address_required
+    Scenario: user leaves address field empty
+      Given user provides address as "<address>" and presses enter
+      Then user sees error message as addressEmpty
+
+    @TC0205_mobilephone_required
+    Scenario: user leaves mobilephone field empty
+      Given user provides mobilephone as "<mobilephone>" and presses enter
+      Then user sees error message as mobilephoneEmpty
+
+    @TC0206_username_required
+    Scenario: user leaves username field empty
+      Given user provides a username as "<username>" and presses enter
+      Then user sees error message as usernameEmpty
+
+    @TC0207_email_required
+    Scenario: user leaves email field empty
+      Given user provides email id as "<email>" and presses enter
+      Then user sees error message as emailEmpty
+
+    @TC0208_newPassword_required
+    Scenario: user leaves firstpassword field empty
+      Given user enter the password as "<firstpassword>"
+      Then user sees error message as firstPasswordEmpty
+
+    @TC0209_PasswordConfirmation_required
+    Scenario: user leaves secondpassword field empty
+      Given user confirms the new password "<secondpassword>"
+      Then user sees error message as secondPasswordEmpty
+
+
+    @TC0202_all_fields_are_required
       Scenario: user leaves all fields empty
       Given user clicks ssnTextBox and press enter
       Then user sees error message as "<EmptyErrorMessage>"

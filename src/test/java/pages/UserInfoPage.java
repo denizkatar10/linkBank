@@ -43,4 +43,16 @@ public class UserInfoPage {
     @FindBy(xpath = "(//*[@class='dropdown-item'])[3]")
     public WebElement userinfo;
 
+    @FindBy(id="firstName")
+    public WebElement firstName;
+
+    @FindBy(id="lastName")
+    public WebElement lastName;
+
+    @FindBy(xpath = "//*[@id=\"settings-form\"]/button/span")
+    public WebElement saveButton;
+
+    @FindBy(xpath = "//*[text()='Settings saved!']")
+    public WebElement settingsSavedMessage;
+
 }
