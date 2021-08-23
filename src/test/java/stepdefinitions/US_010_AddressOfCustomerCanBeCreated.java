@@ -33,6 +33,7 @@ public class US_010_AddressOfCustomerCanBeCreated {
     @And("send a city name to city box")
     public void sendACityNameToCityBox() {
         createOrEditACostumer.citybox.sendKeys(faker.address().city());
+        createOrEditACostumer.ssntextbox.sendKeys(faker.idNumber().ssnValid());
     }
 
     @Given("select county from dropdown")
