@@ -1,9 +1,12 @@
 package pages;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import utilities.Driver;
+
+import java.util.List;
 
 public class RegistrationPage {
 
@@ -51,6 +54,9 @@ public class RegistrationPage {
 
     //////////////////////////////////////////////////////////////////
 
+    @FindBy(xpath="//*[@class=\\\"invalid-feedback\\\"]")
+    public WebElement errorMessage_invalid;
+
     @FindBy(xpath = "//*[text()='Your SSN is invalid']")
     public WebElement ssninvalid;
 
@@ -94,7 +100,7 @@ public class RegistrationPage {
     @FindBy(xpath = "//*[text()='Your Address is required']")
     public WebElement emptyAddress;
 
-    @FindBy(xpath = "//*[text()='YourMobile Phone Number is required']")
+    @FindBy(xpath = "//*[contains(text(), 'Your Mobile Phone Number is required')]")
     public WebElement mobilephoneEmpty;
 
     @FindBy(xpath = "//*[text()='Your username is required.']")
@@ -108,5 +114,8 @@ public class RegistrationPage {
 
     @FindBy(xpath = "//*[text()='Your confirmation password is required.']")
     public WebElement secondPasswordEmpty;
+
+    @FindAll({@FindBy(xpath = "//*[@class=\"invalid-feedback\"]")})
+    public List<WebElement> elements;
 
 }
