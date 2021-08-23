@@ -58,7 +58,7 @@ public class US_009_NewApplicantSearchWithSSN {
     }
     @Given("click Search button")
     public void click_search_button() {
-        createOrEditACostumer.searchbutton.click();
+        //createOrEditACostumer.searchbutton.click();
     }
     @Given("check green success popup")
     public void check_green_success_popup() {
