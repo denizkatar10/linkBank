@@ -8,7 +8,7 @@ public class ConfigurationReader {
 
     private static Properties properties;
     static {
-        String path = "C:\\Users\\Mr Deniz\\IdeaProjects\\LINNBANK1\\configuration.properties";
+        String path = "C:\\Users\\kudik\\IdeaProjects\\LINNBANK\\configuration.properties";
         try {
             FileInputStream fileInputStream = new FileInputStream(path);
             System.out.println(path + " no error");
