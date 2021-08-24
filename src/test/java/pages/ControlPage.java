@@ -25,4 +25,7 @@ public class ControlPage {
 
     @FindBy(xpath = "(//*[@class='dropdown-item'])[3]")
     public WebElement userinfo;
+
+    @FindBy(xpath = "//*[contains(text(),'My Accounts')]")
+    public WebElement myAccounts;
 }
