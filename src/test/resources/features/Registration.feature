@@ -186,23 +186,28 @@
   Scenario: There should be at least 1 lowercase char for stronger password and see the level chart change accordingly
     Given user enter the password as just lower cases
     Then user sees the level chart change (should be two bars)
+    Then closes browser
 
     @PasswordStrength_upperCases
     Scenario: There should be at least 1 uppercase char and see the level  chart change accordingly
       Given user enter the password as lower cases plus upper case
       Then user sees the level chart change (should be three bars)
+      Then closes browser
 
     @PasswordStrength_specialChar
     Scenario: There should be at least 1 special char and see the level bar change accordingly
       Given user enter the password as lower cases plus upper case plus special char
       Then user sees the level chart change (should be four bars)
+      Then closes browser
 
     @PasswordStrength_digits
     Scenario: There should be at least 1 digit  and see the level  chart change accordingly
       Given user enter the password as lower cases plus upper case plus special char plus digits
       Then user sees the level chart change (should be five bars)
+      Then closes browser
 
     @PasswordLessThanSevenChar
     Scenario: There should be at least 7 chars for a stronger password
       Given user enter the password as lower cases + upper case + special char + digits (but less than seven char)
       Then user sees the level chart unchanged (should be just one bar)
+      Then closes browser

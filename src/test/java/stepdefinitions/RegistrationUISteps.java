@@ -456,4 +456,9 @@ public class RegistrationUISteps {
     public void userSeesTheLevelChartUnchangedShouldBeJustOneBar() {
         Assert.assertEquals("rgba(255, 0, 0, 1)", userInfoPage.strength1.getCssValue("background-color"));
     }
+
+    @Then("closes browser")
+    public void closesBrowser() {
+        Driver.closeDriver();
+    }
 }
