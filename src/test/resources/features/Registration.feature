@@ -2,7 +2,6 @@
   Feature: Register new user
     Background:
       Given user on the application page
-      And click account dropdown
       And user click the register
 #      And user on the application page
 #      And user click the register
@@ -181,3 +180,29 @@
 #      Then user sees error message as emailEmpty
 #      Then user sees error message as firstPassword
 #      Then user sees error message as secondPassword
+
+
+  @PasswordStrength_lowerCases
+  Scenario: There should be at least 1 lowercase char for stronger password and see the level chart change accordingly
+    Given user enter the password as just lower cases
+    Then user sees the level chart change (should be two bars)
+
+    @PasswordStrength_upperCases
+    Scenario: There should be at least 1 uppercase char and see the level  chart change accordingly
+      Given user enter the password as lower cases plus upper case
+      Then user sees the level chart change (should be three bars)
+
+    @PasswordStrength_specialChar
+    Scenario: There should be at least 1 special char and see the level bar change accordingly
+      Given user enter the password as lower cases plus upper case plus special char
+      Then user sees the level chart change (should be four bars)
+
+    @PasswordStrength_digits
+    Scenario: There should be at least 1 digit  and see the level  chart change accordingly
+      Given user enter the password as lower cases plus upper case plus special char plus digits
+      Then user sees the level chart change (should be five bars)
+
+    @PasswordLessThanSevenChar
+    Scenario: There should be at least 7 chars for a stronger password
+      Given user enter the password as lower cases + upper case + special char + digits (but less than seven char)
+      Then user sees the level chart unchanged (should be just one bar)

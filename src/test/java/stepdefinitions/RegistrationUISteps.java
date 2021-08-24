@@ -383,4 +383,77 @@ public class RegistrationUISteps {
     public void registerANewAccountLinkIsAOption() {
         Assert.assertTrue(signInPage.registerNewAccount.isEnabled());
     }
+
+
+    String lowerCasePassword = "asdfghjklld";
+//            faker.internet().password (7,12);
+
+    @Given("user enter the password as just lower cases")
+    public void userEnterThePasswordAsJustLowerCases() {
+        Driver.waitAndSendText(registrationPage.firstPasswordTextBox, lowerCasePassword, 5);
+    }
+
+    @Then("user sees the level chart change \\(should be two bars)")
+    public void userSeesTheLevelChartChangeShouldBeTwoBars() {
+        Assert.assertEquals("rgba(255, 153, 0, 1)", userInfoPage.strength2.getCssValue("background-color"));
+//        System.out.println("bar1: "+userInfoPage.strength1.getCssValue("background-color"));
+//        System.out.println("bar2: "+userInfoPage.strength2.getCssValue("background-color"));
+    }
+
+    String upperCasePassword = "fdghfhgfhRTYUYIUYIUY";
+//            faker.internet().password(8,12,true);
+
+    @Given("user enter the password as lower cases plus upper case")
+    public void userEnterThePasswordAsLowerCasesPlusUpperCase() {
+        Driver.waitAndSendText(registrationPage.firstPasswordTextBox, upperCasePassword, 5);
+    }
+
+    @Then("user sees the level chart change \\(should be three bars)")
+    public void userSeesTheLevelChartChangeShouldBeThreeBars() {
+        Assert.assertEquals("rgba(153, 153, 0, 1)", userInfoPage.strength3.getCssValue("background-color"));
+//        System.out.println("bar2: "+userInfoPage.strength2.getCssValue("background-color"));
+//        System.out.println("bar3: "+userInfoPage.strength3.getCssValue("background-color"));
+    }
+
+    String specialCharPassword = "fgdhgfDGFDGFD#$%";
+//            faker.internet().password(8,12,true, true);
+
+    @Given("user enter the password as lower cases plus upper case plus special char")
+    public void userEnterThePasswordAsLowerCasesPlusUpperCasePlusSpecialChar() {
+        Driver.waitAndSendText(registrationPage.firstPasswordTextBox, specialCharPassword, 5);
+    }
+
+    @Then("user sees the level chart change \\(should be four bars)")
+    public void userSeesTheLevelChartChangeShouldBeFourBars() {
+        Assert.assertEquals("rgba(153, 255, 0, 1)", userInfoPage.strength4.getCssValue("background-color"));
+//        System.out.println("bar3: "+userInfoPage.strength3.getCssValue("background-color"));
+//        System.out.println("bar4: "+userInfoPage.strength4.getCssValue("background-color"));
+    }
+
+    String digitsPassword = "fdgfdgfdFDFD^*&^*465546";
+//            faker.internet().password(8,12,true, true, true);
+
+    @Given("user enter the password as lower cases plus upper case plus special char plus digits")
+    public void userEnterThePasswordAsLowerCasesPlusUpperCasePlusSpecialCharPlusDigits() {
+        Driver.waitAndSendText(registrationPage.firstPasswordTextBox, digitsPassword, 5);
+    }
+
+    @Then("user sees the level chart change \\(should be five bars)")
+    public void userSeesTheLevelChartChangeShouldBeFiveBars() {
+        Assert.assertEquals("rgba(0, 255, 0, 1)", userInfoPage.strength5.getCssValue("background-color"));
+//        System.out.println("bar4: "+userInfoPage.strength4.getCssValue("background-color"));
+//        System.out.println("bar5: "+userInfoPage.strength5.getCssValue("background-color"));
+    }
+
+    String smallPassword = "ghH&5";
+
+    @Given("user enter the password as lower cases + upper case + special char + digits \\(but less than seven char)")
+    public void userEnterThePasswordAsLowerCasesUpperCaseSpecialCharDigitsButLessThanSevenChar() {
+        Driver.waitAndSendText(registrationPage.firstPasswordTextBox, smallPassword, 5);
+    }
+
+    @Then("user sees the level chart unchanged \\(should be just one bar)")
+    public void userSeesTheLevelChartUnchangedShouldBeJustOneBar() {
+        Assert.assertEquals("rgba(255, 0, 0, 1)", userInfoPage.strength1.getCssValue("background-color"));
+    }
 }

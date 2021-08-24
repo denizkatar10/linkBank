@@ -55,4 +55,18 @@ public class UserInfoPage {
     @FindBy(xpath = "//*[text()='Settings saved!']")
     public WebElement settingsSavedMessage;
 
+    @FindBy(xpath = "//*[@id=\"strengthBar\"]/li[1]")
+    public WebElement strength1;
+
+    @FindBy(xpath = "//*[@id=\"strengthBar\"]/li[2]")
+    public WebElement strength2;
+
+    @FindBy(xpath = "//*[@id=\"strengthBar\"]/li[3]")
+    public WebElement strength3;
+
+    @FindBy(xpath = "//*[@id=\"strengthBar\"]/li[4]")
+    public WebElement strength4;
+
+    @FindBy(xpath = "//*[@id=\"strengthBar\"]/li[5]")
+    public WebElement strength5;
 }
