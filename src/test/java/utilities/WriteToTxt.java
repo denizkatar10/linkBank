@@ -1,6 +1,7 @@
 package utilities;
 
 
+import pojos.Country;
 import pojos.Customer;
 import pojos.Customer1;
 //import pojos.States;
@@ -222,6 +223,58 @@ public class WriteToTxt {
         }
 
 
+    }
+
+
+    //hatice method ekleme
+    public static void saveDataInFileWithCountrId(String fileName, Country[] countries) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
+            for (int i = 0; i < countries.length; i++)
+                writer.append(countries[i].getId() + "\n");
+            writer.close();
+        } catch (Exception e) {
+        }
+    }
+
+
+
+
+//    public static void saveDataInFileWithStateid(String fileName, States[] sstates)
+//
+//
+//    {
+//        try {
+//            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
+//            for (int i = 0; i < sstates.length; i++)
+//                writer.append(sstates[i].getId() + "\n");
+//            writer.close();
+//        } catch (Exception e) {
+//        }
+//
+//
+//    }
+
+    public static void saveDataInFileWithCountryName(String fileName, Country[] countries) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
+            for (int i = 0; i < countries.length; i++)
+                if(countries[i]!=null) {
+                    writer.append(countries[i].getName() + "\n");
+                }
+            writer.close();
+        } catch (Exception e) {
+        }
+    }
+
+    public static void saveDataInFileWithCountryId(String fileName, Country[] countries) {
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
+            for (int i = 0; i < countries.length; i++)
+                writer.append(countries[i].getId() + "\n");
+            writer.close();
+        } catch (Exception e) {
+        }
     }
 
 
