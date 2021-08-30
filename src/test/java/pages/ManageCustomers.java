@@ -160,8 +160,11 @@ public class ManageCustomers {
     public WebElement ZelleEnrolledBox;
 
 
-    @FindBy(xpath = "//*[text()='Save']")
+    @FindBy(xpath = "(//*[text()='Save'])[3]")
     public WebElement SaveBox;
+
+    @FindBy(xpath = "(//select)[1]")
+    public WebElement countryDropdown;
 }
 
 

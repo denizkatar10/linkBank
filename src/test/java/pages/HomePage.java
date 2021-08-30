@@ -22,4 +22,7 @@ public class HomePage {
     @FindBy(id="email")
     public WebElement emailButton;
 
+    @FindBy(xpath = "//*[text()='Sign out']")
+    public WebElement signout;
+
 }

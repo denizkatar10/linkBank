@@ -47,4 +47,11 @@ public class CustomerAccounts {
 
     @FindBy(xpath = "//*[@id='app-view-container']/div[1]/div/div/div/div[2]/div/table/tbody/tr/td[6]")
     public WebElement TransactionNewBalance;
+
+    @FindBy(xpath = "//*[text()='Team52 Checking']")
+    public WebElement Team52Checking;
+
+    @FindBy(xpath = "//*[text()='Team52 Saving']\n")
+    public WebElement Team52Saving;
+
 }

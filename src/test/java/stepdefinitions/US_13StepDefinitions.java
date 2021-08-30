@@ -2,40 +2,41 @@ package stepdefinitions;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
-import io.cucumber.java.en.Then;
 import org.junit.Assert;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 import pages.US_13Page;
 import utilities.ConfigurationReader;
 import utilities.Driver;
+import utilities.ReusableMethods;
 
 public class US_13StepDefinitions {
     US_13Page us_13Page= new US_13Page();
 
-//TC01
+
+    //TC01
     @Given("Kullanici gmibank anasayfaya gider")
     public void kullanici_gmibank_anasayfaya_gider() {
         Driver.getDriver().get(ConfigurationReader.getProperty("application_url"));
+        ReusableMethods.waitFor(2);
 
     }
     @Given("Giris simgesine tiklar")
     public void giris_simgesine_tiklar() {
         us_13Page.girisButton.click();
         us_13Page.signInGirisButon.click();
+        ReusableMethods.waitFor(2);
     }
     @Given("Gecerli username ve password girer")
     public void gecerli_username_ve_password_girer() {
 
         us_13Page.username.sendKeys(ConfigurationReader.getProperty("employee_username"));
         us_13Page.password.sendKeys(ConfigurationReader.getProperty("employee_password"));
-
+        ReusableMethods.waitFor(2);
     }
     @Given("Sign in butonuna tiklar")
     public void sign_in_butonuna_tiklar() {
         us_13Page.signInButton.click();
+        ReusableMethods.waitFor(2);
 
     }
     @Given("My Operation tiklar")
@@ -58,6 +59,24 @@ public class US_13StepDefinitions {
 
     }
 
+    public void createAccount(String description, String AccType){
+        us_13Page.myOperations.click();
+        us_13Page.manageAccount.click();
+        us_13Page.createAccountButton.click();
+        ReusableMethods.waitFor(2);
+        us_13Page.descriptionTextBox.sendKeys(description);
+        ReusableMethods.waitFor(2);
+        us_13Page.balanceTextBox.sendKeys(ConfigurationReader.getProperty("balanceTextBox"));
+        ReusableMethods.waitFor(2);
+        Select type = new Select(us_13Page.acountTypesecim);
+        Select status = new Select(us_13Page.acountStatusTypesecim);
+        type.selectByVisibleText(AccType);
+        ReusableMethods.waitFor(2);
+        status.selectByValue("ACTIVE");
+        ReusableMethods.waitFor(2);
+        us_13Page.saveButton.click();
+        ReusableMethods.waitFor(2);
+    }
 
     //TC02
     @Given("kullanici Description texbos acıklama yapmalıdır")
@@ -87,7 +106,7 @@ public class US_13StepDefinitions {
     @And("kullanici Create Date girmeli")
     public void kullaniciCreateDateGirmeli() {
         us_13Page.createDateTextBox.click();
-        us_13Page.createDateTextBox.sendKeys("20-05-2020 00:0");
+        us_13Page.createDateTextBox.sendKeys("20-05-2020 00:00");
 
 
     }
@@ -147,5 +166,12 @@ public class US_13StepDefinitions {
     public void sayfaKapanır() {
         Driver.closeDriver();
     }
-}
 
+    @And("employee creates two new accounts")
+    public void employeeCreatesTwoNewAccounts() {
+        createAccount("Team52 Checking", "CHECKING");
+        ReusableMethods.waitFor(2);
+        createAccount("Team52 Saving", "CHECKING");
+        ReusableMethods.waitFor(2);
+    }
+}
