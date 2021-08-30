@@ -20,7 +20,9 @@ public class US_009_NewApplicantSearchWithSSN {
 
     @Given("user on the application page")
     public void user_on_the_application_page() {
+
         Driver.getDriver().get(ConfigurationReader.getProperty("application_url"));
+        ReusableMethods.waitFor(2);
     }
     @Given("click login button")
     public void click_login_button() {
@@ -43,22 +45,30 @@ public class US_009_NewApplicantSearchWithSSN {
     @Given("click My Operations")
     public void click_my_operations() {
         controlPage.myoperations.click();
+        ReusableMethods.waitFor(2);
     }
     @Given("click Manage Customers")
     public void click_manage_customers() {
         controlPage.managecustomers.click();
+        ReusableMethods.waitFor(2);
     }
     @Given("click Create a new Customer")
     public void click_create_a_new_customer() {
         manageCustomers.createanewcustomer.click();
+        ReusableMethods.waitFor(2);
     }
     @Given("write a customer SSN")
     public void write_a_customer_SSN() {
-        createOrEditACostumer.ssntextbox.sendKeys(ConfigurationReader.getProperty("customer_ssn"));
+        createOrEditACostumer.ssntextbox.sendKeys(ConfigurationReader.getProperty("demo_ssn"));
+        ReusableMethods.waitFor(2);
     }
     @Given("click Search button")
     public void click_search_button() {
         createOrEditACostumer.searchbutton.click();
+<<<<<<< HEAD
+=======
+        ReusableMethods.waitFor(2);
+>>>>>>> main
     }
     @Given("check green success popup")
     public void check_green_success_popup() {

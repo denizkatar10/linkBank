@@ -47,7 +47,6 @@ Feature: US_12 An Employee Can Manage Customer
 
       @TC_03
       Scenario: Edit butonu ile tüm müşteri bilgileri düzenlenebilmeli veya olusturulabilmelidir
-
       Given Tüm müşteri bilgilerinin düzenlenebileceği bir Edit düğmesi olmalıdır.
         Then Edit botunu click edildiginde Edit sayfasi goruntulenmelidir
         And sayfada First Name box da bilgiler olusturulabilmeli veya guncellenebilmelidir

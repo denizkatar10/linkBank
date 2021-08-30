@@ -1,6 +1,5 @@
 package pages;
 
-import org.apache.commons.compress.archivers.zip.X000A_NTFS;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -37,17 +36,7 @@ public class US_13Page {
 
     @FindBy (xpath = "//input[@name='balance']")
     public WebElement balanceTextBox;
-    /*
-    @FindBy (id = "tp-account-accountType")
-    public WebElement accountTypeDropdown;
 
-    @FindBy (id = "tp-account-accountStatusType")
-    public WebElement accountStatusDropdown;
-
-    @FindBy (id = "tp-account-employee")
-    public WebElement employeeDropdown;
-
-     */
 
     @FindBy (xpath = "//*[@id='tp-account-accountType']")
     public WebElement acountTypesecim;
@@ -89,12 +78,5 @@ public class US_13Page {
     @FindBy(xpath = "//a[@href='/tp-account']")
     public WebElement manageAccount;
 
-    @FindBy(name = "firstName")
-    public WebElement firstName;
 
-    @FindBy(name = "lastName")
-    public WebElement lastName;
-
-    @FindBy(id = "tp-customer-account")
-    public WebElement account;
 }

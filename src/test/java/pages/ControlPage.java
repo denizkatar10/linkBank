@@ -28,4 +28,7 @@ public class ControlPage {
 
     @FindBy(xpath = "//*[contains(text(),'My Accounts')]")
     public WebElement myAccounts;
+
+    @FindBy(xpath = "//*[contains(text(),'Transfer Money')]")
+    public WebElement MoneyTransfer;
 }

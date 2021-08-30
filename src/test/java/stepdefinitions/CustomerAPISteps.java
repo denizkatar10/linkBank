@@ -68,31 +68,31 @@ public class CustomerAPISteps<customers> {
 //
     @And("All customer info should be saved to correspondent files")
     public void allCustomerInfoShouldBeSavedToCorrespondentFiles() {
-//        System.out.println(fileName);
-//        WriteToTxt.saveDataInFileWithSSN(fileName, customers);
-//        System.out.println(customers.length);
+        System.out.println(fileName);
+        WriteToTxt.saveDataInFileWithSSN(fileName, customers);
+        System.out.println(customers.length);
     }
 
 //
         @Then("validate customers info")
     public void validateCustomersInfo() {
 
-//        String allCustomerInfoFilePath = ConfigurationReader.getProperty("allCustomerInfoFilePath");
+        String allCustomerInfoFilePath = ConfigurationReader.getProperty("allCustomerInfoFilePath");
 //        String allCustomerInfoFilePath = ConfigurationReader.getProperty("customerInformationFile");
-//        System.out.println(allCustomerInfoFilePath);
-//        System.out.println(ReadTxt.returnAWholeUser(allCustomerInfoFilePath).size()-1);
-//        String finalCusSSNid = ReadTxt.returnAWholeUser(allCustomerInfoFilePath).get(ReadTxt.returnAWholeUser(allCustomerInfoFilePath).size()-1).getSsn().toString();
-//
-//        List <String> actualSSNList = ReadTxt.returnCustomerSNNList(fileName);
-//
-//        List <String> expectedSSNList = new ArrayList<>();
-//
-//        expectedSSNList.add("224-71-4004");
-//        expectedSSNList.add("231-89-4203");
-//        expectedSSNList.add("159-63-9248");
-//        Assert.assertTrue("The current data do not match with our records", actualSSNList.containsAll(expectedSSNList));
-//
-//        System.out.println("Final SSN id ==> " + finalCusSSNid);
+        System.out.println(allCustomerInfoFilePath);
+        System.out.println(ReadTxt.returnAWholeUser(allCustomerInfoFilePath).size()-1);
+        String finalCusSSNid = ReadTxt.returnAWholeUser(allCustomerInfoFilePath).get(ReadTxt.returnAWholeUser(allCustomerInfoFilePath).size()-1).getSsn().toString();
+
+        List <String> actualSSNList = ReadTxt.returnCustomerSNNList(fileName);
+
+        List <String> expectedSSNList = new ArrayList<>();
+
+        expectedSSNList.add("224-71-4004");
+        expectedSSNList.add("231-89-4203");
+        expectedSSNList.add("159-63-9248");
+        Assert.assertTrue("The current data do not match with our records", actualSSNList.containsAll(expectedSSNList));
+
+        System.out.println("Final SSN id ==> " + finalCusSSNid);
 
     }
 }
