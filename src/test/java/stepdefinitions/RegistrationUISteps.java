@@ -55,13 +55,14 @@ public class RegistrationUISteps {
     public void userClickTheRegister() {
         homePage.accountdropdown.click();
         homePage.register.click();
+        ReusableMethods.waitFor(2);
     }
 
     @Given("user enters ssn number as  {string}")
     public void userEntersSsnNumberAs(String ssn) {
-        ssn = faker.idNumber().ssnValid();
-        this.ssn = ssn;
-        Driver.waitAndSendText(registrationPage.ssnTextBox, ssn, 5);
+//        ssn = faker.idNumber().ssnValid();
+//        this.ssn = ssn;
+        Driver.waitAndSendText(registrationPage.ssnTextBox, ConfigurationReader.getProperty(ssn), 5);
         customer.setSsn(ssn);
     }
 
@@ -99,9 +100,9 @@ public class RegistrationUISteps {
 
     @And("user provides a username as {string}")
     public void userProvidesAUsernameAs(String username) {
-        username = faker.name().username();
-        this.username = username;
-        Driver.waitAndSendText(registrationPage.usernameTextBox, username, 5);
+//        username = faker.name().username();
+//        this.username = username;
+        Driver.waitAndSendText(registrationPage.usernameTextBox, ConfigurationReader.getProperty(username), 5);
     }
 
     @And("user provides email id as {string}")
@@ -113,15 +114,15 @@ public class RegistrationUISteps {
 
     @And("user enter the password as {string}")
     public void userEnterThePasswordAs(String firstPassword) {
-        firstPassword = faker.internet().password(8,12,true,true,true);
-        this.firstPassword = firstPassword;
-        Driver.waitAndSendText(registrationPage.firstPasswordTextBox, firstPassword, 5);
+//        firstPassword = faker.internet().password(8,12,true,true,true);
+//        this.firstPassword = firstPassword;
+        Driver.waitAndSendText(registrationPage.firstPasswordTextBox, ConfigurationReader.getProperty(firstPassword), 5);
     }
 
     @And("user confirms the new password {string}")
     public void userConfirmsTheNewPassword(String secondPassword) {
-        secondPassword = firstPassword;
-        Driver.waitAndSendText(registrationPage.secondPasswordTextBox, secondPassword, 5);
+//        secondPassword = firstPassword;
+        Driver.waitAndSendText(registrationPage.secondPasswordTextBox, ConfigurationReader.getProperty(secondPassword), 5);
     }
 
     @And("user clicks on register button")
@@ -460,5 +461,25 @@ public class RegistrationUISteps {
     @Then("closes browser")
     public void closesBrowser() {
         Driver.closeDriver();
+    }
+
+    @And("user logs out")
+    public void userLogsOut() {
+        homePage.accountdropdown.click();
+        homePage.signout.click();
+        ReusableMethods.waitFor(2);
+    }
+
+    @And("customer signs in")
+    public void customerSignsIn() {
+        homePage.accountdropdown.click();
+        homePage.signin.click();
+        SignInPage signInPage = new SignInPage();
+        signInPage.usernametext.sendKeys(ConfigurationReader.getProperty("demo_username"));
+        ReusableMethods.waitFor(2);
+        signInPage.passwordtext.sendKeys(ConfigurationReader.getProperty("demo_password"));
+        ReusableMethods.waitFor(2);
+        signInPage.signinbutton.click();
+        ReusableMethods.waitFor(2);
     }
 }

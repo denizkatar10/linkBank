@@ -23,44 +23,52 @@ public class us_16MoneyTransferStep {
     @And("click Transfer Money")
     public void clickTransferMoney() {
         controlPage.MoneyTransfer.click();
+        ReusableMethods.waitFor(2);
     }
 
     @Given("user selects the first account as From dropdown")
     public void userSelectsTheFirstAccountAsFromDropdown() {
         Select select = new Select(transferMoney.FromAccount);
-        select.selectByValue("8326");
+        select.selectByIndex(1);
+        ReusableMethods.waitFor(2);
     }
 
     @And("user selects the second account as To dropdown")
     public void userSelectsTheSecondAccountAsToDropdown() {
         Select toDropDown = new Select(transferMoney.ToAccount);
-        toDropDown.selectByValue("8327");
+        toDropDown.selectByIndex(1);
+        ReusableMethods.waitFor(2);
     }
 
     @And("user clicks on Balance textbox and enters {string} dollars and press tab")
     public void userClicksOnBalanceTextboxAndEntersDollarsAndPressTab(String balance) {
         transferMoney.BalanceDollars.sendKeys(balance + Keys.TAB);
+        ReusableMethods.waitFor(2);
     }
 
     @And("user enters {string} cents")
     public void userEntersCents(String cents) {
         transferMoney.BalanceCents.sendKeys(cents);
+        ReusableMethods.waitFor(2);
     }
 
     @And("user provides description as {string}")
     public void userProvidesDescriptionAs(String description) {
         transferMoney.description.sendKeys(description);
+        ReusableMethods.waitFor(2);
     }
 
     @And("user clicks Make Transfer button")
     public void userClicksMakeTransferButton() {
         transferMoney.MakeTransferButton.click();
+        ReusableMethods.waitFor(2);
     }
 
     @Then("verify user transfers money validating the message an amount of the transaction")
     public void verifyUserTransfersMoneyValidatingTheMessageAnAmountOfTheTransaction() {
         ReusableMethods.waitForVisibility(transferMoney.successMessage, 3);
         Assert.assertTrue(transferMoney.successMessage.isDisplayed());
+        ReusableMethods.waitFor(2);;
     }
 
     @Given("click From dropdown")
